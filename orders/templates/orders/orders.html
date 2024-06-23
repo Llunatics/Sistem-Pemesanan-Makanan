@@ -1,52 +1,53 @@
-{% extends 'orders/header.html' %} 
-{% load custom_tags %} 
-{% load humanize %} 
+{% extends 'orders/header.html' %}
+{% load custom_tags %}
+{% load humanize %}
 {% block content %}
 
-<div class="container-fluid">
-    <div class="content my-3 px-4">
-        <div class="card shadow rounded-0">
-            <div class="card-body">
-                <div class="row justify-content-center">
+<div class="container my-5">
+    <div class="content">
+        <div class="card shadow-lg rounded-0 border-0">
+            <div class="card-body p-5">
+                <div class="row justify-content-center mb-4">
                     {% if user.is_superuser %}
-                    <fieldset class="pb-2 mb-3 border w-100">
-                        <legend class="px-3 w-auto ml-3">Instruksi:</legend>
-                        <ul>
-                            <li>Klik pada Baris Pesanan <small><i>(Baris Berwarna Merah)</i></small> untuk menandai sebagai sudah dikirim</li>
+                    <fieldset class="pb-4 mb-5 border border-primary rounded-lg p-4 w-100">
+                        <legend class="px-3 w-auto ml-3 text-primary">Instruksi:</legend>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">- Klik pada Baris Pesanan <small><i>(Baris Berwarna Merah)</i></small> untuk menandai sebagai sudah dikirim.</li>
                         </ul>
                     </fieldset>
                     {% else %}
-                    <h2> Daftar Pesanan </h2>
+                    <h2 class="text-primary font-weight-bold">Daftar Pesanan</h2>
                     {% endif %}
-
-                    <table class="table" id="order-tbl">
+                </div>
+                <div class="table-responsive mb-5">
+                    <table class="table table-bordered table-striped" id="order-tbl">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">ID Pesanan</th>
-                                <th scope="col">Dipesan oleh</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Pesanan</th>
-                                <th scope="col">Jumlah yang Dibayar</th>
+                                <th scope="col" class="text-center">ID Pesanan</th>
+                                <th scope="col" class="text-center">Dipesan oleh</th>
+                                <th scope="col" class="text-center">Tanggal</th>
+                                <th scope="col" class="text-center">Pesanan</th>
+                                <th scope="col" class="text-center">Jumlah yang Dibayar</th>
                             </tr>
                         </thead>
                         <tbody id="orders_table">
-                            {% for row in rows %} 
+                            {% for row in rows %}
                                 {% if row.delivered %}
                                     <tr class="table-success">
                                 {% else %}
                                     <tr class="table-danger mark-as-complete">
                                 {% endif %}
-                                    <td>{{row.id}}</td>
-                                    <td>{{row.username}}</td>
-                                    <td>{{row.time_of_order}}</td>
-                                    <td>
-                                        <ul>
+                                    <td class="text-center">{{ row.id }}</td>
+                                    <td class="text-center">{{ row.username }}</td>
+                                    <td class="text-center">{{ row.time_of_order }}</td>
+                                    <td class="text-center">
+                                        <ul class="list-unstyled">
                                             {% for item in row.order|format_cart %}
-                                                <li>{{item|format_cart_item}}</li>
+                                                <li>{{ item|format_cart_item }}</li>
                                             {% endfor %}
                                         </ul>
                                     </td>
-                                    <td>Rp. {{row.price|floatformat:2|intcomma}}</td>
+                                    <td class="text-center">Rp. {{ row.price|floatformat:2|intcomma }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
