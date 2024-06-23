@@ -187,7 +187,7 @@ function pizza_toppings(number_of_toppings, type_of_pizza, price) {
         var topping_choices = $('#select_toppings').val();
         $('#toppings_modal').modal('toggle');
         var info = {
-            "item_description": type_of_pizza + " pizza with " + format_toppings(topping_choices),
+            "item_description": type_of_pizza + " dengan " + format_toppings(topping_choices),
             "price": price
         };
         add_to_cart(info);

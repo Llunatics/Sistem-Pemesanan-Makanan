@@ -21,8 +21,8 @@ class Category(models.Model):
 class RegularPizza(models.Model):
     #example row :: 1 topping , 5.00 , 7.00
     pizza_choice = models.CharField(max_length=200)
-    small_price = models.DecimalField(max_digits=6, decimal_places=2)
-    large_price = models.DecimalField(max_digits=6, decimal_places=2)
+    small_price = models.DecimalField(max_digits=10, decimal_places=0)
+    large_price = models.DecimalField(max_digits=10, decimal_places=0)
     category_description = models.TextField() #make this the wysiwyg text field
 
     class Meta:
@@ -36,8 +36,8 @@ class RegularPizza(models.Model):
 class SicilianPizza(models.Model):
     #example row :: 1 topping , 5.00 , 7.00
     pizza_choice = models.CharField(max_length=200)
-    small_price = models.DecimalField(max_digits=6, decimal_places=2)
-    large_price = models.DecimalField(max_digits=6, decimal_places=2)
+    small_price = models.DecimalField(max_digits=10, decimal_places=0)
+    large_price = models.DecimalField(max_digits=10, decimal_places=0)
     category_description = models.TextField() #make this the wysiwyg text field
 
     class Meta:
@@ -65,8 +65,8 @@ class Toppings(models.Model):
 class Sub(models.Model):
     #example row :: meatball , 5.00 , 6.50
     sub_filling = models.CharField(max_length=200)
-    small_price = models.DecimalField(max_digits=6, decimal_places=2)
-    large_price = models.DecimalField(max_digits=6, decimal_places=2)
+    small_price = models.DecimalField(max_digits=10, decimal_places=0)
+    large_price = models.DecimalField(max_digits=10, decimal_places=0)
 
     class Meta:
         verbose_name = "List of Subway Food"
@@ -79,7 +79,7 @@ class Sub(models.Model):
 
 class Pasta(models.Model):
     dish_name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=0)
 
     class Meta:
         verbose_name = "List of Pasta"
@@ -93,7 +93,7 @@ class Pasta(models.Model):
 
 class Salad(models.Model):
     dish_name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=0)
 
     class Meta:
         verbose_name = "List of Salad"
@@ -108,8 +108,8 @@ class Salad(models.Model):
 
 class DinnerPlatters(models.Model):
     dish_name = models.CharField(max_length=200)
-    small_price = models.DecimalField(max_digits=6, decimal_places=2)
-    large_price = models.DecimalField(max_digits=6, decimal_places=2)
+    small_price = models.DecimalField(max_digits=10, decimal_places=0)
+    large_price = models.DecimalField(max_digits=10, decimal_places=0)
 
     class Meta:
         verbose_name = "List of Diner Platters"
@@ -123,7 +123,7 @@ class DinnerPlatters(models.Model):
 class UserOrder(models.Model):
     username = models.CharField(max_length=200) #who placed the order
     order = models.TextField() #this will be a string representation of the cart from localStorage
-    price = models.DecimalField(max_digits=6, decimal_places=2) #how much was the order
+    price = models.DecimalField(max_digits=10, decimal_places=0) #how much was the order
     time_of_order  = models.DateTimeField(default=datetime.now, blank=True)
     delivered = models.BooleanField()
 
