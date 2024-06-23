@@ -1,22 +1,40 @@
-{% extends 'orders/header.html' %} {% block content %}
+{% extends 'orders/header.html' %}
+
+{% block content %}
 <div class="container">
-    <div class="content my-3">
-        <div class="card rounded-0 shadow">
-            <div class="card-body">
-                <div class="row justify-content-center" style="margin-top:20px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.988311056977!2d106.02950537576207!3d-5.99633995891433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e418e2782651571%3A0x249411dd80bfd66e!2sFakultas%20Teknik%20UNTIRTA!5e0!3m2!1sid!2sid!4v1719086573583!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+    <div class="content my-5">
+        <div class="card shadow-lg rounded-0 border-0">
+            <div class="card-body p-5">
+                <div class="row justify-content-center mb-4">
+                    <h3 class="text-center text-primary font-weight-bold"><u>Lokasi Kami</u></h3>
                 </div>
-                <div class="row justify-content-center" style="margin-top:20px;">
-
-                    <ul>
-                        <li>Berlokasi di Fakultas Teknik Untirta.</li>
-                        <li>Dekat Kantin Belakang.</li>
-                    </ul>
-
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-10 text-center">
+                        <p class="lead">Kunjungi toko kami di lokasi strategis yang mudah diakses dan nyaman. Kami selalu siap melayani Anda dengan produk-produk berkualitas dan layanan terbaik.</p>
+                    </div>
                 </div>
-
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-8">
+                        <!-- Embedded Google Map -->
+                        <div class="embed-responsive embed-responsive-16by9 border rounded shadow-sm">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.988311056977!2d106.02950537576204!3d-5.996339958914322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e418e2782651571%3A0x249411dd80bfd66e!2sFakultas%20Teknik%20UNTIRTA!5e0!3m2!1sid!2sid!4v1719114553443!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p class="text-center mb-4">Alamat kami:</p>
+                        <p class="text-center"><strong>XYZ Shop</strong></p>
+                        <p class="text-center">Jl. Mawar No. 123, Jakarta, Indonesia</p>
+                        <p class="text-center">Telepon: +628 9123 4567 89</p>
+                        <p class="text-center">Email: <a href="mailto:info@xyzshop.com" class="text-decoration-none">info@xyzshop.com</a></p>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-lg-10">
+                        <p class="text-center">Kami berada di pusat kota, mudah dijangkau dengan berbagai moda transportasi umum. Nikmati pengalaman berbelanja yang nyaman dan menyenangkan bersama kami. Kami menantikan kunjungan Anda!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
