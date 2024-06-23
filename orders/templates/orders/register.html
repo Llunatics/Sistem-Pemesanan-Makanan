@@ -1,25 +1,86 @@
 {% extends 'orders/header.html' %} {% block content %}
-<div class="d-flex align-items-center justify-content-center w-100 h-100 flex-column" id="register-box">
-    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
-        <div class="card card-default rounded-0 shadow">
+<style>
+    #register-page {
+        height: calc(100vh - 50px); /* Adjust if necessary for your header */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: inherit; /* Ensure the background inherits from the parent */
+        padding-top: 50px; /* Adjust if necessary for your header */
+    }
+    #register-box {
+        max-width: 600px;
+        width: 100%;
+        padding: 20px;
+    }
+    .card {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-header, .card-footer {
+        background-color: #fff;
+        border-bottom: none;
+        text-align: center;
+        padding: 15px 20px;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-control {
+        border-radius: 5px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .text-muted {
+        font-size: 0.875rem;
+    }
+    .alert {
+        border-radius: 5px;
+    }
+</style>
+
+<div id="register-page">
+    <div id="register-box">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Daftar</h4>
+            </div>
             <div class="card-body">
-                <form method="POST" id="">
+                <form method="POST">
                     {% csrf_token %} {% for field in form %}
                     <div class="form-group">
-                        <div class="control-label">
-                            {{field.label}}
-                        </div>
+                        <label class="form-label">{{field.label}}</label>
                         {{field}} {% if field.help_text %}
                         <small class="text-muted">{{field.help_text}}</small> {% endif %} {% if field.errors %}
-                        <div class="alert alert-danger rounded-0">{{field.errors}}</div>
+                        <div class="alert alert-danger">{{field.errors}}</div>
                         {% endif %}
                     </div>
                     {% endfor %}
-                    <button class="btn btn-danger" type="submit">Daftar</button>
+                    <div class="d-grid">
+                        <button class="btn btn-primary" type="submit">Daftar</button>
+                    </div>
                 </form>
             </div>
-            <div class="py-1 text-center card-footer">
-                <a href="/login" class=""><b>Sudah punya akun?</b></a>
+            <div class="card-footer">
+                Sudah punya akun? <br>
+                <a href="/login"><strong>Login di sini</strong></a>
             </div>
         </div>
     </div>
