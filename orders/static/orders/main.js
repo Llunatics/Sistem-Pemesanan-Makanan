@@ -22,7 +22,7 @@ function order_list_functionality() {
         var csrftoken = getCookie('csrftoken');
         var user_is_super = check_user_super();
         if (user_is_super && row.classList.contains("mark-as-complete")) {
-            var r = confirm("Would you like to mark order " + id + " as delivered?");
+            var r = confirm("Apa anda ingin menandai pesanan " + id + " sudah terkirim?");
             if (r == true) {
                 $.ajax({
                     url: "/mark_order_as_delivered",
@@ -85,7 +85,7 @@ function onRowClick(tableId, callback) {
     }
 }
 
-function display_notif(type, info = "No info provided") {
+function display_notif(type, info = "Tidak ada info diberikan") {
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -105,20 +105,20 @@ function display_notif(type, info = "No info provided") {
     }
     switch (type) {
         case "add to cart":
-            toastr.success(info.item_description + ': Rp. ' + info.price, 'Added to Cart');
+            toastr.success(info.item_description + ': Rp. ' + info.price, 'ditambahkan ke keranjang');
             break;
         case "remove from cart":
-            toastr.info("Successfully removed " + info + " from cart");
+            toastr.info("Berhasil menghapus " + info + " dari keranjang");
             break;
         case "new order":
-            toastr.success("Order successfully placed");
+            toastr.success("Pesanan berhasil dilakukan");
             break;
     }
 }
 
 function load_cart() {
     var table = document.getElementById('cart_body');
-    table.innerHTML = ""; //clear the table
+    table.innerHTML = "";
     var cart = JSON.parse(localStorage.getItem("cart"));
     var total = 0;
     if (cart !== null && cart.length > 0) {
@@ -139,13 +139,13 @@ function load_cart() {
         onRowClick("cart_body", function(row) {
             var value = row.getElementsByTagName("td")[0].innerHTML;
             var description = row.getElementsByTagName("td")[1].innerHTML;
-            var r = confirm("Proceed to delete '" + description + "' from cart?");
+            var r = confirm("Lanjutkan untuk menghapus '" + description + "' dari keranjang?");
             if (r == true) {
                 document.getElementById("cart_body").deleteRow(value - 1);
-                cart.splice(value - 1, 1); //remove elements from the list
-                localStorage.setItem('cart', JSON.stringify(cart)); //update local storage
+                cart.splice(value - 1, 1); 
+                localStorage.setItem('cart', JSON.stringify(cart));
                 display_notif("remove from cart", description);
-                load_cart(); //refresh the page
+                load_cart();
             }
         });
     } else {
@@ -173,7 +173,7 @@ function format_toppings(topping_choices) {
 function pizza_toppings(number_of_toppings, type_of_pizza, price) {
     var last_valid_selection = null;
 
-    $('#toppings_label')[0].innerHTML = "Choose " + String(number_of_toppings) + " topping(s) here";
+    $('#toppings_label')[0].innerHTML = "Pilih " + String(number_of_toppings) + " topping(s) di sini";
     $('#select_toppings').change(function(event) {
         if ($(this).val().length > number_of_toppings) {
             $(this).val(last_valid_selection);
@@ -216,16 +216,16 @@ function getCookie(name) {
 
 function display_empty_cart() {
     var table = document.getElementById('cart_body');
-    table.innerHTML = ""; //clear the table
+    table.innerHTML = "";
     document.getElementById('total').innerHTML = "";
-    document.getElementById('cart_heading').innerHTML = "Cart is empty!";
+    document.getElementById('cart_heading').innerHTML = "Keranjang masih kosong!";
     document.getElementById("checkout_button").disabled = true;
 }
 
 function clear_cart() {
-    localStorage.removeItem("cart"); // Clear the cart
-    localStorage.removeItem("total_price"); // Clear the price
-    display_empty_cart(); // Remove the elements from the page
+    localStorage.removeItem("cart");
+    localStorage.removeItem("total_price"); 
+    display_empty_cart();
 }
 
 function checkout() {
@@ -233,11 +233,11 @@ function checkout() {
     var price_of_cart = localStorage.getItem("total_price");
     var csrftoken = getCookie('csrftoken');
 
-    console.log("Checkout was clicked so we now send it to the server!"); // Sanity check
+    console.log("Checkout was clicked so we now send it to the server!");
     $.ajax({
-        url: "/checkout", // The endpoint
-        type: "POST", // HTTP method
-        data: { cart: cart, price_of_cart: price_of_cart, csrfmiddlewaretoken: csrftoken }, // Data sent with the post request
+        url: "/checkout",
+        type: "POST",
+        data: { cart: cart, price_of_cart: price_of_cart, csrfmiddlewaretoken: csrftoken },
 
         success: function(json) {
             display_notif("new order");
@@ -254,12 +254,12 @@ function logout() {
     var current_cart = localStorage.getItem("cart");
     var csrftoken = getCookie('csrftoken');
     $.ajax({
-        url: "/save_cart", // The endpoint
-        type: "POST", // HTTP method
-        data: { cart: current_cart, csrfmiddlewaretoken: csrftoken }, // Data sent with the post request
+        url: "/save_cart",
+        type: "POST", 
+        data: { cart: current_cart, csrfmiddlewaretoken: csrftoken },
 
         success: function(json) {
-            localStorage.removeItem("cart"); // Clear the cart
+            localStorage.removeItem("cart");
             localStorage.setItem('cart_retrieved', false);
             window.location.href = "/logout";
         },
