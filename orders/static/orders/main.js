@@ -233,7 +233,7 @@ function checkout() {
     var price_of_cart = localStorage.getItem("total_price");
     var csrftoken = getCookie('csrftoken');
 
-    console.log("Checkout was clicked so we now send it to the server!");
+    console.log("Checkout sudah dikonfirmasi!");
     $.ajax({
         url: "/checkout",
         type: "POST",
