@@ -1,0 +1,129 @@
+{% extends 'orders/header.html' %} {% block content %}
+
+<div class="container">
+    <div class="card shadow rounded-0">
+        <div class="card-body">
+            <h4 style="margin:10px; text-align:center;"> Pilih salah satu Pizza &#x1f355 </h4>
+            <div class="row justify-content-center">
+
+                <div class="card" id="regular_pizza_card" style="width: 24rem; margin:10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pizza Reguler</h5>
+                        {% for pizza in regular_pizza %} {% if pizza.category_description != "default" %}
+                        <p class="card-text">{{ pizza.category_description | safe}}</p>
+                        {% endif %} {% endfor %}
+                    </div>
+                </div>
+
+                <div class="card" id="sicillian_pizza_card" style="width: 24rem; margin:10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Pizza Sisilia</h5>
+                        {% for pizza in sicillian_pizza %} {% if pizza.category_description != "default" %}
+                        <p class="card-text">{{ pizza.category_description | safe }}</p>
+                        {% endif %} {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <table class="table" id="sicillian_pizza_table" style="border: 2px solid black">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Pizza Sisilia</th>
+                            <th scope="col">Kecil</th>
+                            <th scope="col">Besar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pizza in sicillian_pizza %}
+                        <tr>
+                            <th>{{pizza.pizza_choice}}</th>
+                            {% if number_of_toppings %}
+                            <td><button type="button" class="btn btn-primary add_to_cart" onclick="pizza_toppings({{number_of_toppings}}, 'Pizza Sisilia Kecil', {{pizza.small_price}})"><strong>{{pizza.small_price}}</strong></button></td>
+                            <td><button type="button" class="btn btn-success add_to_cart" onclick="pizza_toppings({{number_of_toppings}}, 'Pizza Sisilia Besar', {{pizza.large_price}})"><strong>{{pizza.large_price}}</strong></button></td>
+                            {% else %}
+                            <td><button type="button" class="btn btn-primary add_to_cart" onclick="add_to_cart({item_description: 'Pizza Sisilia Kecil - {{pizza.pizza_choice}}' , price: {{pizza.small_price}}})"><strong>{{pizza.small_price}}</strong></button></td>
+                            <td><button type="button" class="btn btn-success add_to_cart" onclick="add_to_cart({item_description: 'Pizza Sisilia Besar - {{pizza.pizza_choice}}' , price: {{pizza.large_price}}})"><strong>{{pizza.large_price}}</strong></button></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <table class="table" id="regular_pizza_table" style="border: 2px solid black">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Pizza Reguler</th>
+                            <th scope="col">Kecil</th>
+                            <th scope="col">Besar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pizza in regular_pizza %}
+                        <tr>
+                            <th>{{pizza.pizza_choice}}</th>
+                            {% if number_of_toppings %}
+                            <td><button type="button" class="btn btn-primary add_to_cart" onclick="pizza_toppings({{number_of_toppings}}, 'Pizza Reguler Kecil', {{pizza.small_price}})"><strong>{{pizza.small_price}}</strong></button></td>
+                            <td><button type="button" class="btn btn-success add_to_cart" onclick="pizza_toppings({{number_of_toppings}}, 'Pizza Reguler Besar', {{pizza.large_price}})"><strong>{{pizza.large_price}}</strong></button></td>
+                            {% else %}
+                            <td><button type="button" class="btn btn-primary add_to_cart" onclick="add_to_cart({item_description: 'Pizza Reguler Kecil - {{pizza.pizza_choice}}' , price: {{pizza.small_price}} })"><strong>{{pizza.small_price}}</strong></button></td>
+                            <td><button type="button" class="btn btn-success add_to_cart" onclick="add_to_cart({item_description: 'Pizza Reguler Besar - {{pizza.pizza_choice}}' , price: {{pizza.large_price}} })"><strong>{{pizza.large_price}}</strong></button></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="toppings_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambahan Topping</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <label id="toppings_label" for="select_toppings"></label>
+                <select multiple class="form-control" id="select_toppings">
+              {% for topping in toppings %}
+                <option>{{topping}}</option>
+              {% endfor %}
+            </select>
+            </div>
+            <div class="modal-footer">
+                <button id="submit_toppings" type="button" class="btn btn-primary">Tambahkan ke keranjang</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var currently_selected;
+    var regular_pizza = document.getElementById('regular_pizza_card');
+    var sicillian_pizza = document.getElementById('sicillian_pizza_card');
+
+    regular_pizza.onclick = function() {
+        if (currently_selected !== "regular") {
+            currently_selected = "regular";
+            regular_pizza.style.border = "2px solid black";
+            sicillian_pizza.style.border = "None";
+        }
+    };
+
+    sicillian_pizza.onclick = function() {
+        if (currently_selected !== "sicillian") {
+            currently_selected = "sicillian";
+            sicillian_pizza.style.border = "2px solid black";
+            regular_pizza.style.border = "None";
+        }
+    };
+</script>
+
+{% endblock %}
