@@ -1,19 +1,42 @@
 {% extends 'orders/header.html' %}
 {% load static %}
 {% block content %}
-    <div class="container-fluid">
-      <div class="row justify-content-center">
+<style>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 0.9rem;
+        color: #555;
+    }
+    .btn-gradient {
+        background: linear-gradient(45deg, #007bff, #00b3ff);
+        border: none;
+    }
+    .btn-gradient:hover {
+        background: linear-gradient(45deg, #0056b3, #0080ff);
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
         {% for cat in categories %}
-          <div class="card rounded-0" style="width: 18rem; margin: 20px;">
+        <div class="card rounded-0" style="width: 18rem;">
             <img src="{% if cat.category_gif %}{{cat.category_gif.url}}{% else %}{% static 'no-img-available.png' %}{% endif %}" class="card-img-top cat-img rounded-0" alt="gif for category item" style="width:100%;">
-            <div class="card-body">
-              <h5 class="card-title" >{{cat.category_title}}</h5>
-              <p class="card-text truncate-3">{{cat.category_description|striptags}}</p>
-              <center><a href="{{cat.category_title}}" class="btn rounded-0 btn-gradient bg-primary text-light" >Order {{cat.category_title}}</a></center>
+            <div class="card-body text-center">
+                <h5 class="card-title">{{cat.category_title}}</h5>
+                <p class="card-text truncate-3">{{cat.category_description|striptags}}</p>
+                <a href="{{cat.category_title}}" class="btn btn-gradient text-light">Order {{cat.category_title}}</a>
             </div>
-          </div>
+        </div>
         {% endfor %}
-      </div>
     </div>
+</div>
 
 {% endblock %}

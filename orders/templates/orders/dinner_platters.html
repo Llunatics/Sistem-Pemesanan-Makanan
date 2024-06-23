@@ -1,17 +1,35 @@
 {% extends 'orders/header.html' %} {% block content %}
-
-
+<style>
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+    .table {
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+    .table thead {
+        background-color: #343a40;
+        color: white;
+    }
+    .btn-primary, .btn-success {
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+</style>
 
 <div class="container">
     <div class="content my-4 px-4">
         <div class="card rounded-0 shadow">
             <div class="card-body">
-
-                <h4 style="margin:10px; text-align:center;"> Pilih Salah Satu Platter </h4>
-
+                <h4 class="text-center my-4">Pilih Salah Satu Platter</h4>
                 <div class="row justify-content-center">
-
-                    <table class="table" style="border: 2px solid black">
+                    <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Dinner Platter</th>
@@ -23,13 +41,12 @@
                             {% for dish in dishes %}
                             <tr>
                                 <th>{{dish.dish_name}}</th>
-                                <td><button type="button" class="btn btn-primary" onclick="add_to_cart({item_description:'Small - {{dish.dish_name}}' , price:{{dish.small_price}}})"><strong>{{dish.small_price}}</strong></button></td>
-                                <td><button type="button" class="btn btn-success" onclick="add_to_cart({item_description:'Large - {{dish.dish_name}}' , price:{{dish.large_price}}})"><strong>{{dish.large_price}}</strong></button></td>
+                                <td><button type="button" class="btn btn-primary" onclick="add_to_cart({item_description:'Small - {{dish.dish_name}}', price:{{dish.small_price}}})"><strong>{{dish.small_price}}</strong></button></td>
+                                <td><button type="button" class="btn btn-success" onclick="add_to_cart({item_description:'Large - {{dish.dish_name}}', price:{{dish.large_price}}})"><strong>{{dish.large_price}}</strong></button></td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
