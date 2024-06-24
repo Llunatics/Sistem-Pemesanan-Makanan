@@ -1,0 +1,90 @@
+{% extends 'orders/header.html' %} {% block content %}
+<style>
+    #login-page {
+        height: calc(100vh - 50px); /* Adjust if necessary for your header */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: inherit; /* Ensure the background inherits from the parent */
+        padding-top: 50px; /* Adjust if necessary for your header */
+    }
+    #login-box {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+    }
+    .card {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-header, .card-footer {
+        background-color: #fff;
+        border-bottom: none;
+        text-align: center;
+        padding: 15px 20px;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-control {
+        border-radius: 5px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+    .text-muted {
+        font-size: 0.875rem;
+    }
+    .alert {
+        border-radius: 5px;
+    }
+</style>
+
+<div id="login-page">
+    <div id="login-box">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Login</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %} {% for field in form %}
+                    <div class="form-group">
+                        <label class="form-label">{{field.label}}</label>
+                        {{field}}
+                        {% if field.help_text %}
+                        <small class="text-muted">{{field.help_text}}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %} {% if error %}
+                    <div class="alert alert-danger">{{error}}</div>
+                    {% endif %}
+                    <div class="d-grid">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                Belum punya akun? <br>
+                <a href="/register"><strong>Daftar di sini</strong></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
